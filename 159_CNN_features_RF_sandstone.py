@@ -11,17 +11,19 @@ import glob
 import cv2
 import pickle
 
-from keras.models import Sequential
-from keras.layers import Conv2D
+import tensorflow as tf
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Conv2D
 import os
 
-print(os.listdir("images/"))
+
+print(os.getcwd())
 
 SIZE = 512 #Resize images
 
 train_images = []
 
-for directory_path in glob.glob("images/train_images"):
+for directory_path in glob.glob("GitHub/python_for_microscopists/images/Train_images"):
     for img_path in glob.glob(os.path.join(directory_path, "*.tif")):
         img = cv2.imread(img_path, cv2.IMREAD_COLOR)       
         img = cv2.resize(img, (SIZE, SIZE))
@@ -32,7 +34,7 @@ for directory_path in glob.glob("images/train_images"):
 train_images = np.array(train_images)
 
 train_masks = [] 
-for directory_path in glob.glob("images/train_masks"):
+for directory_path in glob.glob("GitHub/python_for_microscopists/images/Train_masks"):
     for mask_path in glob.glob(os.path.join(directory_path, "*.tif")):
         mask = cv2.imread(mask_path, 0)       
         mask = cv2.resize(mask, (SIZE, SIZE))
@@ -49,8 +51,11 @@ y_train = np.expand_dims(y_train, axis=3)
 
 activation = 'sigmoid'
 feature_extractor = Sequential()
-feature_extractor.add(Conv2D(32, 3, activation = activation, padding = 'same', input_shape = (SIZE, SIZE, 3)))
-feature_extractor.add(Conv2D(32, 3, activation = activation, padding = 'same', kernel_initializer = 'he_uniform'))
+feature_extractor.add(Conv2D(32, 3, activation = activation, 
+                             padding = 'same', input_shape = (SIZE, SIZE, 3)))
+feature_extractor.add(Conv2D(32, 3, activation = activation, 
+                             padding = 'same', 
+                             kernel_initializer = 'he_uniform'))
 
 #feature_extractor.add(Conv2D(64, 3, activation = activation, padding = 'same', kernel_initializer = 'he_uniform'))
 #feature_extractor.add(BatchNormalization())
@@ -93,9 +98,8 @@ pickle.dump(model, open(filename, 'wb'))
 loaded_model = pickle.load(open(filename, 'rb'))
 
 
-
 #READ EXTERNAL IMAGE...
-test_img = cv2.imread('images/test_images/Sandstone_Versa0360.tif', cv2.IMREAD_COLOR)       
+test_img = cv2.imread('images/Train_images/Sandstone_Versa0000.tif', cv2.IMREAD_COLOR)       
 test_img = cv2.resize(test_img, (SIZE, SIZE))
 test_img = cv2.cvtColor(test_img, cv2.COLOR_RGB2BGR)
 test_img = np.expand_dims(test_img, axis=0)
