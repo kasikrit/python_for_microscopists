@@ -12,7 +12,8 @@ import seaborn as sns
 from keras.models import Sequential
 from keras.layers import Dense, Activation, Dropout
 
-df = pd.read_csv("data/wisconsin_breast_cancer_dataset.csv")
+
+df = pd.read_csv("data/breast-cancer-wisconsin.data", header=None)
 
 print(df.describe().T)  #Values need to be normalized before fitting. 
 print(df.isnull().sum())
