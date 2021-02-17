@@ -131,6 +131,8 @@ import cv2
 grey_img = cv2.imread("images/test_image.jpg", 0)
 color_img = cv2.imread("images/test_image.jpg", 1)
 
+color_img = cv2.imread("test.jpg")
+
 #images opened using cv2 are numpy arrays
 print(type(grey_img)) 
 print(type(color_img)) 
@@ -163,6 +165,9 @@ plt.imshow(cv2.cvtColor(color_img, cv2.COLOR_BGR2RGB))
 
 #We can also change color spaces from RGB to HSV..
 plt.imshow(cv2.cvtColor(color_img, cv2.COLOR_BGR2HSV))
+
+dst = cv2.cvtColor(color_img, cv2.COLOR_BGR2RGB)
+cv2.imwrite("test.png", imgRGB)
 
 """
 ###############################################################################

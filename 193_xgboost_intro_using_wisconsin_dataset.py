@@ -65,7 +65,11 @@ print(df.isnull().sum())
 #df = df.dropna()
 
 #Rename Dataset to Label to make it easy to understand
+<<<<<<< Updated upstream
 df = df.rename(columns={'Diagnosis':'Label'})
+=======
+df = df.rename(columns={'diagnosis':'Label'})
+>>>>>>> Stashed changes
 print(df.dtypes)
 
 #Understand the data 
@@ -78,6 +82,13 @@ df['Label'].value_counts()
 #Define the dependent variable that needs to be predicted (labels)
 y = df["Label"].values
 
+<<<<<<< Updated upstream
+=======
+# from keras.utils import to_categorical
+# y_onehot = to_categorical(y)
+
+
+>>>>>>> Stashed changes
 # Encoding categorical data
 from sklearn.preprocessing import LabelEncoder
 labelencoder = LabelEncoder()
@@ -86,7 +97,11 @@ Y = labelencoder.fit_transform(y) # M=1 and B=0
 #Define x and normalize values
 
 #Define the independent variables. Let's also drop Gender, so we can normalize other data
+<<<<<<< Updated upstream
 X = df.drop(labels = ["Label", "ID"], axis=1) 
+=======
+X = df.drop(labels = ["Label", "id"], axis=1) 
+>>>>>>> Stashed changes
 
 
 from sklearn.preprocessing import MinMaxScaler
@@ -102,7 +117,11 @@ X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size=0.25, random
 
 #RANDOM FOREST, to compare against xgboost
 from sklearn.ensemble import RandomForestClassifier
+<<<<<<< Updated upstream
 model = RandomForestClassifier(n_estimators = 10, random_state = 42)
+=======
+# model = RandomForestClassifier(n_estimators = 10, random_state = 42)
+>>>>>>> Stashed changes
 #
 ## Train the model on training data
 #model.fit(X_train, y_train) #For sklearn no one hot encoding

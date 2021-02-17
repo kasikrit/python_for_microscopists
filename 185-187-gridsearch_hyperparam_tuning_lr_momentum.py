@@ -69,7 +69,8 @@ y_test = keras.utils.to_categorical(y_test, num_classes)
 
 #Take a subset of train for grid search. Let us take 10% for now
 from sklearn.model_selection import train_test_split
-x_grid, x_not_use, y_grid, y_not_use = train_test_split(x_train, y_train, test_size=0.9, random_state=42)
+x_grid, x_not_use, y_grid, y_not_use = train_test_split(x_train, y_train, 
+    test_size=0.9, random_state=42)
 
 # build the model
 input_dim = x_grid.shape[1]
