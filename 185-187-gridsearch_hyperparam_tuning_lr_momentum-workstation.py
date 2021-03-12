@@ -110,14 +110,12 @@ momentum = [0.3, 0.5, 0.7, 0.9]
 # -1 refers to using all available CPUs
 #Cross validation, cv=3
 param_grid = dict(learning_rate=learning_rate, momentum=momentum)
-grid = GridSearchCV(estimator=model, param_grid=param_grid, n_jobs=4, 
-                    cv=3)
+grid = GridSearchCV(estimator=model, param_grid=param_grid, n_jobs=-1, cv=3)
 
 grid_result = grid.fit(x_grid, y_grid)
 
 # summarize results
-print("Best: %f using %s" % (grid_result.best_score_, 
-                             grid_result.best_params_))
+print("Best: %f using %s" % (grid_result.best_score_, grid_result.best_params_))
 
 means = grid_result.cv_results_['mean_test_score']
 stds = grid_result.cv_results_['std_test_score']
